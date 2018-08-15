@@ -9,50 +9,51 @@
 */
 package com.zl.lqian.modules.blog.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.*;
+
 /**
- * 系统配置
+ * 模块/内容分组
  * @author zl
  *
  */
 @Entity
-@Table(name = "mto_config")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Config {
+@Table(name = "mto_channels")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Channel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	private int type;
-	
+	private int id;
+
+	/**
+	 * 名称
+	 */
+	private String name;
+
+	/**
+	 * 唯一关键字
+	 */
 	@Column(name = "key_", unique = true)
 	private String key;
-	
-	private String value;
 
-	public long getId() {
+	private int status;
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getKey() {
@@ -63,12 +64,11 @@ public class Config {
 		this.key = key;
 	}
 
-	public String getValue() {
-		return value;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	
 }

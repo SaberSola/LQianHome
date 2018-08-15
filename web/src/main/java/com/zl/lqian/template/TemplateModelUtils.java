@@ -2,14 +2,12 @@ package com.zl.lqian.template;
 
 import freemarker.template.*;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.StringUtils.split;
-import static org.apache.commons.lang3.StringUtils.trimToEmpty;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Freemarker 模型工具类

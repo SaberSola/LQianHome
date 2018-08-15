@@ -6,12 +6,15 @@
 |   http://www.mtons.com
 |
 +---------------------------------------------------------------------------
-*/
+*//*
+
 package com.zl.lqian.core.event.handler;
 
 import com.zl.lqian.base.lang.Consts;
-import com.zl.lqian.base.oauth.OauthOsc;
+
 import com.zl.lqian.core.event.PostUpdateEvent;
+
+
 import com.zl.lqian.modules.blog.data.FeedsVO;
 import com.zl.lqian.modules.blog.service.FeedsService;
 import org.slf4j.Logger;
@@ -23,9 +26,11 @@ import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
 
+*/
 /**
  * @author zl on 2015/8/18.
- */
+ *//*
+
 @Component
 public class PostFeedsEventHandler implements ApplicationListener<PostUpdateEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostFeedsEventHandler.class);
@@ -62,3 +67,4 @@ public class PostFeedsEventHandler implements ApplicationListener<PostUpdateEven
 
     }
 }
+*/

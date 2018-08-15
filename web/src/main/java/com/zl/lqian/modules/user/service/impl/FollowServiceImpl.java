@@ -10,8 +10,8 @@
 package com.zl.lqian.modules.user.service.impl;
 
 import com.zl.lqian.base.lang.MtonsException;
-import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.user.dao.FollowDao;
+import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.user.entity.Follow;
 import com.zl.lqian.modules.user.entity.User;
 import com.zl.lqian.modules.user.service.FollowService;

@@ -1,8 +1,8 @@
 package com.zl.lqian.modules.blog.service.impl;
 
+import com.zl.lqian.modules.blog.dao.FavorDao;
 import com.zl.lqian.modules.blog.data.FavorVO;
 import com.zl.lqian.modules.blog.data.PostVO;
-import com.zl.lqian.modules.blog.dao.FavorDao;
 import com.zl.lqian.modules.blog.entity.Favor;
 import com.zl.lqian.modules.blog.service.FavorService;
 import com.zl.lqian.modules.blog.service.PostService;

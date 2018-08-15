@@ -9,25 +9,29 @@
 */
 package com.zl.lqian.modules.blog.service.impl;
 
-import com.zl.lqian.base.context.SpringContextHolder;
 import com.zl.lqian.base.lang.Consts;
 import com.zl.lqian.base.lang.EntityStatus;
 import com.zl.lqian.base.utils.PreviewTextUtils;
+import com.zl.lqian.boot.mq.MQConstants;
+import com.zl.lqian.boot.mq.RabbitMetaMessage;
 import com.zl.lqian.core.event.PostUpdateEvent;
-import com.zl.lqian.modules.blog.data.PostVO;
-import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.blog.dao.PostAttributeDao;
 import com.zl.lqian.modules.blog.dao.PostDao;
+import com.zl.lqian.modules.blog.data.PostVO;
 import com.zl.lqian.modules.blog.entity.Channel;
-import com.zl.lqian.modules.blog.entity.PostAttribute;
 import com.zl.lqian.modules.blog.entity.Post;
-import com.zl.lqian.modules.utils.BeanMapUtils;
+import com.zl.lqian.modules.blog.entity.PostAttribute;
 import com.zl.lqian.modules.blog.service.ChannelService;
 import com.zl.lqian.modules.blog.service.FavorService;
 import com.zl.lqian.modules.blog.service.PostService;
+import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.user.service.UserEventService;
 import com.zl.lqian.modules.user.service.UserService;
+import com.zl.lqian.modules.utils.BeanMapUtils;
+import com.zl.lqian.web.controller.mqservice.RabbitSender;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -52,6 +56,10 @@ import java.util.*;
 @Transactional
 @CacheConfig(cacheNames = "postsCaches")
 public class PostServiceImpl implements PostService {
+
+	private Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
+
+
 	@Autowired
 	private PostDao postDao;
 	@Autowired
@@ -64,6 +72,8 @@ public class PostServiceImpl implements PostService {
 	private ChannelService channelService;
 	@Autowired
 	private PostAttributeDao postAttributeDao;
+	@Autowired
+	RabbitSender rabbitSender;
 
 	@Override
 	@Cacheable
@@ -458,12 +468,26 @@ public class PostServiceImpl implements PostService {
 	private void onPushEvent(Post post, int action) {
 		//TODO 这里改为发送mq消息
 
-
-
+		//封装消息体
+		RabbitMetaMessage metaMessage = new RabbitMetaMessage();
+		//设置交换机
+		metaMessage.setExchange(MQConstants.BUSINESS_EXCHANGE);
+		//设置key
+		metaMessage.setRoutingKey(MQConstants.ACTION_KEY);
+		//封装具体消息体
 		PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
 		event.setPostId(post.getId());
 		event.setUserId(post.getAuthorId());
 		event.setAction(action);
-		SpringContextHolder.publishEvent(event);
+		//SpringContextHolder.publishEvent(event);
+		metaMessage.setPayload(event);
+		//发送消息
+		try {
+			rabbitSender.send(metaMessage);
+		}catch (Exception e){
+			logger.debug("mq消息发送异常",e);
+			e.printStackTrace();
+		}
+
 	}
 }

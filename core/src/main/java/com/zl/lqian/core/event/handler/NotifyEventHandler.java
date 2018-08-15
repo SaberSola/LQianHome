@@ -1,3 +1,4 @@
+/*
 package com.zl.lqian.core.event.handler;
 
 import com.zl.lqian.base.lang.Consts;
@@ -11,9 +12,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+*/
 /**
  * @author zl on 2015/8/31.
- */
+ *//*
+
 @Component
 public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
     @Autowired
@@ -49,3 +52,4 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
         notifyService.send(nt);
     }
 }
+*/

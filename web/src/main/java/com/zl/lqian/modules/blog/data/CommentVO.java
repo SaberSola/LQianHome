@@ -9,12 +9,12 @@
 */
 package com.zl.lqian.modules.blog.data;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zl.lqian.modules.blog.entity.Comment;
 import com.zl.lqian.modules.user.data.UserVO;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author zl

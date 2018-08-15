@@ -10,9 +10,6 @@
 package com.zl.lqian.modules.blog.entity;
 
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;

@@ -1,3 +1,4 @@
+/*
 package com.zl.lqian.core.event.handler;
 
 import com.zl.lqian.core.event.PostUpdateEvent;
@@ -7,10 +8,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+*/
 /**
  * 更新文章统计
  * created by zl
- */
+ *//*
+
 @Component
 public class PostCountEventHandler implements ApplicationListener<PostUpdateEvent> {
     @Autowired
@@ -33,3 +36,4 @@ public class PostCountEventHandler implements ApplicationListener<PostUpdateEven
         }
     }
 }
+*/

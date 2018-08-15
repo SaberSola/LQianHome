@@ -12,8 +12,8 @@ package com.zl.lqian.modules.blog.data;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zl.lqian.base.lang.Consts;
 import com.zl.lqian.modules.blog.entity.Channel;
-import com.zl.lqian.modules.blog.entity.PostAttribute;
 import com.zl.lqian.modules.blog.entity.Post;
+import com.zl.lqian.modules.blog.entity.PostAttribute;
 import com.zl.lqian.modules.user.data.UserVO;
 import org.apache.commons.lang3.StringUtils;
 

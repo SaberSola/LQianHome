@@ -10,19 +10,18 @@
 package com.zl.lqian.modules.user.service.impl;
 
 import com.zl.lqian.base.utils.MD5;
+import com.zl.lqian.modules.user.dao.OpenOauthDao;
+import com.zl.lqian.modules.user.dao.UserDao;
+import com.zl.lqian.modules.user.data.OpenOauthVO;
 import com.zl.lqian.modules.user.data.UserVO;
+import com.zl.lqian.modules.user.entity.OpenOauth;
+import com.zl.lqian.modules.user.entity.User;
 import com.zl.lqian.modules.user.service.OpenOauthService;
 import com.zl.lqian.modules.utils.BeanMapUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.zl.lqian.modules.user.data.OpenOauthVO;
-import com.zl.lqian.modules.user.dao.OpenOauthDao;
-import com.zl.lqian.modules.user.dao.UserDao;
-import com.zl.lqian.modules.user.entity.OpenOauth;
-import com.zl.lqian.modules.user.entity.User;
 
 /**
  * 第三方登录授权管理

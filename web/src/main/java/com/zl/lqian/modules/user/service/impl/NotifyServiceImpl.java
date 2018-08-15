@@ -1,11 +1,11 @@
 package com.zl.lqian.modules.user.service.impl;
 
 import com.zl.lqian.base.lang.Consts;
-import com.zl.lqian.modules.user.data.NotifyVO;
 import com.zl.lqian.modules.blog.data.PostVO;
-import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.blog.service.PostService;
 import com.zl.lqian.modules.user.dao.NotifyDao;
+import com.zl.lqian.modules.user.data.NotifyVO;
+import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.user.entity.Notify;
 import com.zl.lqian.modules.user.service.NotifyService;
 import com.zl.lqian.modules.user.service.UserService;
