@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public interface FeedsDao extends JpaRepository<Feeds, Long>, JpaSpecificationExecutor<Feeds>, FeedsDaoCustom {

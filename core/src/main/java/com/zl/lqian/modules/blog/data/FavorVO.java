@@ -3,7 +3,7 @@ package com.zl.lqian.modules.blog.data;
 import com.zl.lqian.modules.blog.entity.Favor;
 
 /**
- * @author langhsu on 2015/8/31.
+ * @author zl on 2015/8/31.
  */
 public class FavorVO extends Favor {
     // extend

@@ -21,7 +21,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
- * @author langhsu
+ * @author zl
  * 
  */
 public interface FollowDao extends JpaRepository<Follow, Long>, JpaSpecificationExecutor<Follow> {

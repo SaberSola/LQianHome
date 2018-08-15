@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public interface ChannelDao extends JpaRepository<Channel, Integer>, JpaSpecificationExecutor<Channel> {

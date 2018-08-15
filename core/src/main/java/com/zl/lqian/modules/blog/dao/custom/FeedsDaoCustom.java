@@ -3,7 +3,7 @@ package com.zl.lqian.modules.blog.dao.custom;
 import com.zl.lqian.modules.blog.data.FeedsVO;
 
 /**
- * Created by langhsu on 2017/9/30.
+ * Created by zl on 2017/9/30.
  */
 public interface FeedsDaoCustom {
     /**

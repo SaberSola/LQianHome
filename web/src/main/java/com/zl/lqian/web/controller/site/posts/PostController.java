@@ -11,6 +11,7 @@ import com.zl.lqian.modules.blog.service.ChannelService;
 import com.zl.lqian.modules.blog.service.PostService;
 import com.zl.lqian.web.controller.BaseController;
 import com.zl.lqian.web.controller.site.Views;
+import com.zl.lqian.web.utils.OssUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ import java.io.IOException;
 
 /**
  * 文章操作
- * @author langhsu
+ * @author zl
  *
  */
 @Controller
@@ -68,17 +69,17 @@ public class PostController extends BaseController {
 
 		AccountProfile profile = getSubject().getProfile();
 		post.setAuthorId(profile.getId());
-
+		String fileName = file.getOriginalFilename();
 		/**
 		 * 保存预览图片
 		 */
 		if (file != null && !file.isEmpty()) {
-			String thumbnail = fileRepo.store(file, appContext.getThumbsDir());
+			/*String thumbnail = fileRepo.store(file, appContext.getThumbsDir());
 
 			if (StringUtils.isNotBlank(post.getThumbnail())) {
 				fileRepo.deleteFile(post.getThumbnail());
-			}
-
+			}*/
+            String thumbnail = OssUtils.uploadImag(fileName,file);
 			post.setThumbnail(thumbnail);
 		}
 

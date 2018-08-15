@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 更新文章统计
- * created by langhsu
+ * created by zl
  */
 @Component
 public class PostCountEventHandler implements ApplicationListener<PostUpdateEvent> {

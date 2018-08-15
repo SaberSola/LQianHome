@@ -4,7 +4,7 @@
 package com.zl.lqian.base.lang;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public enum EnumLog {

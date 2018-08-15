@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 import java.text.MessageFormat;
 
 /**
- * @author langhsu on 2015/8/18.
+ * @author zl on 2015/8/18.
  */
 @Component
 public class PostFeedsEventHandler implements ApplicationListener<PostUpdateEvent> {

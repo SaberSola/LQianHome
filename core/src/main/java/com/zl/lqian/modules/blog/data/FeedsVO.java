@@ -13,7 +13,7 @@ import com.zl.lqian.modules.blog.entity.Feeds;
 
 /**
  * 订阅
- * @author langhsu
+ * @author zl
  *
  */
 public class FeedsVO extends Feeds {

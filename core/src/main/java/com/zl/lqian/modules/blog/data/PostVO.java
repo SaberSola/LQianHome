@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
 /**
- * @author langhsu
+ * @author zl
  * 
  */
 public class PostVO extends Post implements Serializable {

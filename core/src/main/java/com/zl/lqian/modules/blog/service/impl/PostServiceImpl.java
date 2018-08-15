@@ -45,7 +45,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.*;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 @Service
@@ -96,10 +96,6 @@ public class PostServiceImpl implements PostService {
 			if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("views")));
 			}
-
-//			predicate.getExpressions().add(
-//					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
-
 			query.orderBy(orders);
 
 			return predicate;
@@ -457,6 +453,8 @@ public class PostServiceImpl implements PostService {
 	private void submitAttr(PostAttribute attr) {
 		postAttributeDao.save(attr);
 	}
+
+	//TODO 此处可以改为使用mq发送消息
 
 	private void onPushEvent(Post post, int action) {
 		PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());

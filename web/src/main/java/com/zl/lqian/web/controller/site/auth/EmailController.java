@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 /**
- * @author langhsu on 2015/8/14.
+ * @author zl on 2015/8/14.
  */
 @Controller
 @RequestMapping("/email")

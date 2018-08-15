@@ -1,7 +1,7 @@
 package com.zl.lqian.web.menu;
 
 /**
- * @author - langhsu
+ * @author - zl
  * @create - 2018/5/18
  */
 public class Menu {

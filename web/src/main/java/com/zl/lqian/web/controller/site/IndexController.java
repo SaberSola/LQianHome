@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.zl.lqian.base.lang.Consts;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 @Controller

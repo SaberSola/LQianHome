@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zl.lqian.web.controller.BaseController;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 @Controller("adminCommentController")

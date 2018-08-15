@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * @author langhsu
+ * @author zl
  */
 public abstract class AbstractFileRepo implements FileRepo {
     private Logger log = Logger.getLogger(this.getClass());

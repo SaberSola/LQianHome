@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户事件操作, 用于统计用户信息
- * @author langhsu on 2015/8/6.
+ * @author zl on 2015/8/6.
  */
 @Service
 @Transactional

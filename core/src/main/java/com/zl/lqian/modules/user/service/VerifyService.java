@@ -10,7 +10,7 @@
 package com.zl.lqian.modules.user.service;
 
 /**
- * @author langhsu on 2015/8/14.
+ * @author zl on 2015/8/14.
  */
 public interface VerifyService {
     /**

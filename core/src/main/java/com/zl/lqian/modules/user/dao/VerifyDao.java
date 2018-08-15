@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @author langhsu on 2015/8/14.
+ * @author zl on 2015/8/14.
  */
 public interface VerifyDao extends JpaRepository<Verify, Long>, JpaSpecificationExecutor<Verify> {
     Verify findByUserIdAndType(long userId, int type);

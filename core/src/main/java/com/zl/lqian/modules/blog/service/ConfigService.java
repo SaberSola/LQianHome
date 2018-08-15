@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public interface ConfigService {

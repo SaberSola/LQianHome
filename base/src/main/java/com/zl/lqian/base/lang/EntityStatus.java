@@ -10,7 +10,7 @@
 package com.zl.lqian.base.lang;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public interface EntityStatus {

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author - langhsu on 2018/2/11
+ * @author - zl on 2018/2/11
  */
 public class PermissionTree extends Permission {
     private List<PermissionTree> items;

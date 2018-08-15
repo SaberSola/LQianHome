@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Channel 主页
- * @author langhsu
+ * @author zl
  *
  */
 @Controller
@@ -58,6 +58,7 @@ public class ChannelController extends BaseController {
 
 		Assert.notNull(view, "该文章已被删除");
 
+		//TODO  自增浏览数后期需要改成redis
 		postService.identityViews(id);
 		model.put("view", view);
 		return view(Views.ROUTE_POST_VIEW);

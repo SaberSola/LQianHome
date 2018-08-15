@@ -1,7 +1,7 @@
 package com.zl.lqian.base.lang;
 
 /**
- * @author langhsu on 2015/9/5.
+ * @author zl on 2015/9/5.
  */
 public interface SiteConfig {
     /**

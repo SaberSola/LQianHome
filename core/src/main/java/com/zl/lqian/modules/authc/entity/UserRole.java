@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 用户角色映射表
  *
- * @author - langhsu on 2018/2/11
+ * @author - zl on 2018/2/11
  */
 @Entity
 @Table(name = "shiro_user_role")

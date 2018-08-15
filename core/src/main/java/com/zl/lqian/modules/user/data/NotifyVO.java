@@ -4,7 +4,7 @@ import com.zl.lqian.modules.blog.data.PostVO;
 import com.zl.lqian.modules.user.entity.Notify;
 
 /**
- * @author langhsu on 2015/8/31.
+ * @author zl on 2015/8/31.
  */
 public class NotifyVO extends Notify {
     // extend

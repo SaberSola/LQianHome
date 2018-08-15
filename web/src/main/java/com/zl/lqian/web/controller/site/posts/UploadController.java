@@ -11,6 +11,8 @@ package com.zl.lqian.web.controller.site.posts;
 
 import com.zl.lqian.base.utils.FileKit;
 import com.zl.lqian.web.controller.BaseController;
+import com.zl.lqian.web.utils.Enums;
+import com.zl.lqian.web.utils.OssUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -27,27 +29,14 @@ import java.util.HashMap;
 /**
  * Ueditor 文件上传
  *
- * @author langhsu
+ * @author zl
  */
 @Controller
 @RequestMapping("/post")
 public class UploadController extends BaseController {
-    private static HashMap<String, String> errorInfo = new HashMap<>();
 
     @Value("${site.store.size:2}")
     private String storeSize;
-
-    static {
-        errorInfo.put("SUCCESS", "SUCCESS"); //默认成功
-        errorInfo.put("NOFILE", "未包含文件上传域");
-        errorInfo.put("TYPE", "不允许的文件格式");
-        errorInfo.put("SIZE", "文件大小超出限制，最大支持2Mb");
-        errorInfo.put("ENTYPE", "请求类型ENTYPE错误");
-        errorInfo.put("REQUEST", "上传请求异常");
-        errorInfo.put("IO", "IO异常");
-        errorInfo.put("DIR", "目录创建失败");
-        errorInfo.put("UNKNOWN", "未知错误");
-    }
 
     @PostMapping("/upload")
     @ResponseBody
@@ -59,39 +48,34 @@ public class UploadController extends BaseController {
 
         // 检查空
         if (null == file || file.isEmpty()) {
-            return result.error(errorInfo.get("NOFILE"));
+            return result.error(Enums.uploadEnums.UPLOAD_NOFILE.getMsg());
         }
-
         String fileName = file.getOriginalFilename();
 
         // 检查类型
         if (!FileKit.checkFileType(fileName)) {
-            return result.error(errorInfo.get("TYPE"));
+            return result.error(Enums.uploadEnums.UPLOAD_TYPE.getMsg());
         }
-
-        // 检查大小
-        if (file.getSize() > (Long.parseLong(storeSize) * 1024 * 1024)) {
-            return result.error(errorInfo.get("SIZE"));
-        }
-
         // 保存图片
         try {
             String path;
-            if (crop == 1) {
+            /*if (crop == 1) {
                 int width = ServletRequestUtils.getIntParameter(request, "width", 364);
                 int height = ServletRequestUtils.getIntParameter(request, "height", 200);
                 path = fileRepo.storeScale(file, appContext.getThumbsDir(), width, height);
             } else {
                 path = fileRepo.storeScale(file, appContext.getThumbsDir(), size);
-            }
-            result.ok(errorInfo.get("SUCCESS"));
+            }*/
+
+            path  = OssUtils.uploadImag(fileName,file);
+            result.ok(Enums.uploadEnums.UPLOAD_SUCCESS.getMsg());
             result.setName(fileName);
             result.setType(getSuffix(fileName));
             result.setPath(path);
             result.setSize(file.getSize());
 
         } catch (Exception e) {
-            result.error(errorInfo.get("UNKNOWN"));
+            result.error(Enums.uploadEnums.UPLOAD_UNKNOWN.getMsg());
             e.printStackTrace();
         }
 

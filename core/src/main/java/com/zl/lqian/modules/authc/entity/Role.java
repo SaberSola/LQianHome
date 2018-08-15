@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 角色
- * @author - langhsu on 2018/2/11
+ * @author - zl on 2018/2/11
  */
 @Entity
 @Table(name = "shiro_role")

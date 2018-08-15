@@ -17,7 +17,7 @@ import com.zl.lqian.modules.blog.entity.Comment;
 import com.zl.lqian.modules.user.data.UserVO;
 
 /**
- * @author langhsu
+ * @author zl
  * 
  */
 public class CommentVO extends Comment implements Serializable {

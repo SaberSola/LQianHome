@@ -4,7 +4,7 @@
 package com.zl.lqian.base.utils;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public class FilePathUtils {

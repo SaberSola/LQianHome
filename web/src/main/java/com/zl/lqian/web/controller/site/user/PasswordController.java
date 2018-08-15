@@ -23,7 +23,7 @@ import com.zl.lqian.web.controller.BaseController;
 import com.zl.lqian.web.controller.site.Views;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 @Controller

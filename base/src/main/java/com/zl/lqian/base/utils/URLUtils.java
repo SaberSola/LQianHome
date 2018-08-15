@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public class URLUtils {

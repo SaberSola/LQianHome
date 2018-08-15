@@ -2,8 +2,8 @@
 +--------------------------------------------------------------------------
 |   LQianHome [#RELEASE_VERSION#]
 |   ========================================
-|   Copyright (c) 2014, 2015 mtons. All Rights Reserved
-|   http://www.mtons.com
+|   Copyright (c) 2014, 2015 LQianHome. All Rights Reserved
+|   http://www.LQianHome.com
 |
 +---------------------------------------------------------------------------
 */

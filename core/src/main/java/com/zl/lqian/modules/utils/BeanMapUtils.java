@@ -25,7 +25,7 @@ import com.zl.lqian.modules.user.entity.User;
 import org.springframework.beans.BeanUtils;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public class BeanMapUtils {

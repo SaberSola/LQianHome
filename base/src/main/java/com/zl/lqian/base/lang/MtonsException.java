@@ -11,7 +11,7 @@ package com.zl.lqian.base.lang;
 
 /**
  * 
- * @author langhsu
+ * @author zl
  *
  */
 public class MtonsException extends RuntimeException {

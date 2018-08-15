@@ -12,7 +12,7 @@ package com.zl.lqian.base.upload.impl;
 import org.springframework.stereotype.Service;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 @Service

@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 第三方登录回调
  *
- * @author langhsu on 2015/8/12.
+ * @author zl on 2015/8/12.
  */
 @Controller
 @RequestMapping("/oauth/callback")

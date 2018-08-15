@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author langhsu
+ * @author zl
  *
  */
 public class PostDaoImpl implements PostDaoCustom {

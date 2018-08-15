@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author langhsu on 2015/8/31.
+ * @author zl on 2015/8/31.
  */
 public interface NotifyDao extends JpaRepository<Notify, Long>, JpaSpecificationExecutor<Notify> {
     Page<Notify> findAllByOwnIdOrderByIdDesc(Pageable pageable, long ownId);

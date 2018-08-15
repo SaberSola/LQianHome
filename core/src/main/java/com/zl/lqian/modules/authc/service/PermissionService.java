@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * @author - langhsu on 2018/2/11
+ * @author - zl on 2018/2/11
  */
 public interface PermissionService {
     /**

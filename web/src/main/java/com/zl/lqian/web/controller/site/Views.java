@@ -13,7 +13,7 @@ package com.zl.lqian.web.controller.site;
  * 
  * 返回页面配置
  * 
- * @author langhsu
+ * @author zl
  *
  */
 public interface Views {

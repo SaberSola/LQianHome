@@ -26,7 +26,7 @@ import com.zl.lqian.modules.user.entity.User;
 
 /**
  * 第三方登录授权管理
- * @author langhsu on 2015/8/12.
+ * @author zl on 2015/8/12.
  */
 @Service
 public class OpenOauthServiceImpl implements OpenOauthService {

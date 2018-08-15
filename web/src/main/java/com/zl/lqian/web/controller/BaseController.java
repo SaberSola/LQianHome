@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * Controller 基类
  * 
- * @author langhsu
+ * @author zl
  * 
  */
 public class BaseController {
