@@ -15,11 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OauthQQ extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthQQ.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OauthQQ.class);
+
   private static final String AUTH_URL = "https://graph.qq.com/oauth2.0/authorize";
   private static final String TOKEN_URL = "https://graph.qq.com/oauth2.0/token";
   private static final String TOKEN_INFO_URL = "https://graph.qq.com/oauth2.0/me";
@@ -92,7 +95,7 @@ public class OauthQQ extends Oauth
     JSONObject dataMap = JSON.parseObject(getUserInfo(accessToken, openId));
     dataMap.put("openid", openId);
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
   

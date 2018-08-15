@@ -48,6 +48,7 @@ public class FeedsServiceImpl implements FeedsService {
 		// 给自己保存一条
 		feedsDao.save(po);
 
+		//TODO 可能有更好的解决办法
 		// 派发给粉丝, 此处牺牲了空间, 提升查询速度
 		return feedsDao.batchAdd(feeds);
 	}

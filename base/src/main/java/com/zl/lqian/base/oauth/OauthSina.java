@@ -15,11 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OauthSina extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthSina.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OauthSina.class);
   private static final String AUTH_URL = "https://api.weibo.com/oauth2/authorize";
   private static final String TOKEN_URL = "https://api.weibo.com/oauth2/access_token";
   private static final String TOKEN_INFO_URL = "https://api.weibo.com/oauth2/get_token_info";
@@ -90,7 +92,7 @@ public class OauthSina extends Oauth
     }
     JSONObject dataMap = JSON.parseObject(getUserInfo(accessToken, uid));
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
   

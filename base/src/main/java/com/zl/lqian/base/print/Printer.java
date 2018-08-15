@@ -1,10 +1,14 @@
 package com.zl.lqian.base.print;
 
+import com.zl.lqian.base.oauth.OauthSina;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author zl on 2015/9/6.
  */
 public class Printer {
-    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("LQianHome");
+    private static final Logger log = LoggerFactory.getLogger(OauthSina.class);
 
     public static void info(String message) {
         log.info(message);

@@ -14,11 +14,13 @@ import java.security.NoSuchProviderException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OauthDouban extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthDouban.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OauthDouban.class);
   private static final String AUTH_URL = "https://www.douban.com/service/auth2/auth";
   private static final String TOKEN_URL = "https://www.douban.com/service/auth2/token";
   private static final String USER_INFO_URL = "https://api.douban.com/v2/user/~me";
@@ -75,7 +77,7 @@ public class OauthDouban extends Oauth
     }
     JSONObject dataMap = getUserInfo(accessToken);
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
   

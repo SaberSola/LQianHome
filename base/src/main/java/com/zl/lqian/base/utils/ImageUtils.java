@@ -1,7 +1,8 @@
 package com.zl.lqian.base.utils;
 
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -14,7 +15,7 @@ import java.net.URLConnection;
  * @author zl on 2015/9/4.
  */
 public class ImageUtils {
-    private static Logger log = Logger.getLogger(ImageUtils.class);
+    private static Logger log = LoggerFactory.getLogger(ImageUtils.class);
 
     public static void validate(String dest) throws IOException {
         File destFile = new File(dest);

@@ -11,12 +11,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.zl.lqian.base.utils.ImageUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OauthBaidu extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthBaidu.class);
+  private static Logger LOGGER = LoggerFactory.getLogger(OauthBaidu.class);
+
   private static final String AUTH_URL = "https://openapi.baidu.com/oauth/2.0/authorize";
   private static final String TOKEN_URL = "https://openapi.baidu.com/oauth/2.0/token";
   private static final String USER_INFO_URL = "https://openapi.baidu.com/rest/2.0/passport/users/getInfo";
@@ -71,7 +76,7 @@ public class OauthBaidu extends Oauth
     String userInfo = getUserInfo(accessToken);
     JSONObject dataMap = JSON.parseObject(userInfo);
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
 }

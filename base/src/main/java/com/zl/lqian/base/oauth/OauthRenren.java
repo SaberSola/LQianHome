@@ -11,11 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OauthRenren extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthRenren.class);
+  private static Logger LOGGER = LoggerFactory.getLogger(OauthRenren.class);
   private static final String AUTH_URL = "https://graph.renren.com/oauth/authorize";
   private static final String TOKEN_URL = "https://graph.renren.com/oauth/token";
   
@@ -69,7 +70,7 @@ public class OauthRenren extends Oauth
     }
     JSONObject userJson = json.getJSONObject("user");
     userJson.put("access_token", access_token);
-    LOGGER.debug(userJson);
+    LOGGER.debug(userJson.toJSONString());
     return userJson;
   }
 }

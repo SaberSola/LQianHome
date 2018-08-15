@@ -11,10 +11,12 @@ package com.zl.lqian.base.upload.impl;
 
 import com.zl.lqian.base.context.AppContext;
 import com.zl.lqian.base.lang.MtonsException;
+import com.zl.lqian.base.oauth.OauthSina;
 import com.zl.lqian.base.upload.FileRepo;
 import com.zl.lqian.base.utils.FileNameUtils;
 import com.zl.lqian.base.utils.ImageUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +31,7 @@ import java.util.Iterator;
  * @author zl
  */
 public abstract class AbstractFileRepo implements FileRepo {
-    private Logger log = Logger.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFileRepo.class);
 
     @Autowired
     protected AppContext appContext;
@@ -138,7 +140,7 @@ public abstract class AbstractFileRepo implements FileRepo {
         // 文件存在, 且不是目录
         if (file.exists() && !file.isDirectory()) {
             file.delete();
-            log.info("fileRepo delete " + storePath);
+            LOGGER.info("fileRepo delete " + storePath);
         }
     }
 

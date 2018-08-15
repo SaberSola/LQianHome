@@ -454,9 +454,12 @@ public class PostServiceImpl implements PostService {
 		postAttributeDao.save(attr);
 	}
 
-	//TODO 此处可以改为使用mq发送消息
 
 	private void onPushEvent(Post post, int action) {
+		//TODO 这里改为发送mq消息
+
+
+
 		PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
 		event.setPostId(post.getId());
 		event.setUserId(post.getAuthorId());

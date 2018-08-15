@@ -1,8 +1,10 @@
 package com.zl.lqian.base.utils;
 
+import com.zl.lqian.base.oauth.OauthQQ;
 import freemarker.template.Template;
 import com.zl.lqian.base.lang.MtonsException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,7 +21,7 @@ import java.util.Map;
  */
 @Component
 public class MailHelper {
-    private Logger log = Logger.getLogger(getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailHelper.class);
     @Autowired
     private Environment env;
     @Autowired
@@ -41,7 +43,7 @@ public class MailHelper {
             javaMailSender.send(mimeMessage);
 
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
             throw new  MtonsException("邮件发送失败", e);
         }
     }

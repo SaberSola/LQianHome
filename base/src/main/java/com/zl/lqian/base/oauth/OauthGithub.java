@@ -13,12 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OauthGithub
   extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthGithub.class);
+  private static Logger LOGGER = LoggerFactory.getLogger(OauthGithub.class);
   private static final String AUTH_URL = "https://github.com/login/oauth/authorize";
   private static final String TOKEN_URL = "https://github.com/login/oauth/access_token";
   private static final String USER_INFO_URL = "https://api.github.com/user";
@@ -81,7 +82,7 @@ public class OauthGithub
     }
     JSONObject dataMap = getUserInfo(accessToken);
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
 }

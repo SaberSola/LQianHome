@@ -13,12 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OauthOsc extends Oauth
 {
-  private static final Logger LOGGER = Logger.getLogger(OauthOsc.class);
-  private static final String AUTH_URL = "http://www.oschina.net/action/oauth2/authorize";
+  private static final Logger LOGGER = LoggerFactory.getLogger(OauthOsc.class);  private static final String AUTH_URL = "http://www.oschina.net/action/oauth2/authorize";
   private static final String TOKEN_URL = "http://www.oschina.net/action/openapi/token";
   private static final String USER_INFO_URL = "http://www.oschina.net/action/openapi/user";
   private static final String TWEET_PUB = "http://www.oschina.net/action/openapi/tweet_pub";
@@ -74,15 +75,15 @@ public class OauthOsc extends Oauth
     try {
       JSONObject dataMap = JSON.parseObject(super.doPost("http://www.oschina.net/action/openapi/tweet_pub", params));
       
-      LOGGER.debug(dataMap);
+      LOGGER.debug(dataMap.toJSONString());
     } catch (KeyManagementException e) {
-      LOGGER.error(e);
+      LOGGER.error(e.getMessage(),e);
     } catch (NoSuchAlgorithmException e) {
-      LOGGER.error(e);
+      LOGGER.error(e.getMessage(),e);
     } catch (NoSuchProviderException e) {
-      LOGGER.error(e);
+      LOGGER.error(e.getMessage(),e);
     } catch (IOException e) {
-      LOGGER.error(e);
+      LOGGER.error(e.getMessage(),e);
     }
     return null;
   }
@@ -95,7 +96,7 @@ public class OauthOsc extends Oauth
     }
     JSONObject dataMap = getUserInfo(accessToken);
     dataMap.put("access_token", accessToken);
-    LOGGER.debug(dataMap);
+    LOGGER.debug(dataMap.toJSONString());
     return dataMap;
   }
 }

@@ -10,10 +10,12 @@
 package com.zl.lqian.core.event.handler;
 
 import com.zl.lqian.base.lang.Consts;
+import com.zl.lqian.base.oauth.OauthOsc;
 import com.zl.lqian.core.event.PostUpdateEvent;
 import com.zl.lqian.modules.blog.data.FeedsVO;
 import com.zl.lqian.modules.blog.service.FeedsService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
@@ -26,7 +28,9 @@ import java.text.MessageFormat;
  */
 @Component
 public class PostFeedsEventHandler implements ApplicationListener<PostUpdateEvent> {
-    private Logger log = Logger.getLogger(getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostFeedsEventHandler.class);
+    private static final String AUTH_URL = "http://www.oschina.net/action/oauth2/authorize";
+
 
     @Autowired
     private FeedsService feedsService;
@@ -49,7 +53,7 @@ public class PostFeedsEventHandler implements ApplicationListener<PostUpdateEven
 
                 int ret = feedsService.add(feeds);
 
-                log.debug(MessageFormat.format("成功派发 {0} 条动态!", ret));
+                LOGGER.debug(MessageFormat.format("成功派发 {0} 条动态!", ret));
                 break;
             case PostUpdateEvent.ACTION_DELETE:
                 feedsService.deleteByTarget(event.getPostId());

@@ -21,7 +21,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  *
  */
 public interface FeedsDao extends JpaRepository<Feeds, Long>, JpaSpecificationExecutor<Feeds>, FeedsDaoCustom {
+
 	Page<Feeds> findAllByOwnIdOrderByIdDesc(Pageable pageable, long ownId);
+
 	int deleteAllByOwnIdAndAuthorId(long ownId, long authorId);
+
 	void deleteAllByPostId(long postId);
 }
