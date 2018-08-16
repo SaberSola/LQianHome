@@ -14,7 +14,6 @@ import com.zl.lqian.base.lang.EntityStatus;
 import com.zl.lqian.base.utils.PreviewTextUtils;
 import com.zl.lqian.boot.mq.MQConstants;
 import com.zl.lqian.boot.mq.RabbitMetaMessage;
-import com.zl.lqian.core.event.PostUpdateEvent;
 import com.zl.lqian.modules.blog.dao.PostAttributeDao;
 import com.zl.lqian.modules.blog.dao.PostDao;
 import com.zl.lqian.modules.blog.data.PostVO;
@@ -28,6 +27,7 @@ import com.zl.lqian.modules.user.data.UserVO;
 import com.zl.lqian.modules.user.service.UserEventService;
 import com.zl.lqian.modules.user.service.UserService;
 import com.zl.lqian.modules.utils.BeanMapUtils;
+import com.zl.lqian.web.controller.mqservice.PostUpdateEvent;
 import com.zl.lqian.web.controller.mqservice.RabbitSender;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -400,8 +400,8 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(key = "'view_' + #postId")
 	public void favor(long userId, long postId) {
-		postDao.updateFavors(postId, Consts.IDENTITY_STEP);
 		favorService.add(userId, postId);
+		postDao.updateFavors(postId, Consts.IDENTITY_STEP);
 	}
 
 	@Override
@@ -475,7 +475,7 @@ public class PostServiceImpl implements PostService {
 		//设置key
 		metaMessage.setRoutingKey(MQConstants.ACTION_KEY);
 		//封装具体消息体
-		PostUpdateEvent event = new PostUpdateEvent(System.currentTimeMillis());
+		PostUpdateEvent event = new PostUpdateEvent();
 		event.setPostId(post.getId());
 		event.setUserId(post.getAuthorId());
 		event.setAction(action);

@@ -15,6 +15,7 @@ public interface FavorService {
      * @return
      */
     void add(long userId, long postId);
+
     void delete(long userId, long postId);
 
     /**

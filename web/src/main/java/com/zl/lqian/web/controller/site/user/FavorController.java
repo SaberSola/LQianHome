@@ -2,10 +2,13 @@ package com.zl.lqian.web.controller.site.user;
 
 import com.zl.lqian.base.data.Data;
 import com.zl.lqian.base.lang.Consts;
+import com.zl.lqian.boot.mq.MQConstants;
+import com.zl.lqian.boot.mq.RabbitMetaMessage;
 import com.zl.lqian.modules.user.data.AccountProfile;
-import com.zl.lqian.core.event.NotifyEvent;
 import com.zl.lqian.modules.blog.service.PostService;
 import com.zl.lqian.web.controller.BaseController;
+import com.zl.lqian.web.controller.mqservice.NotifyEvent;
+import com.zl.lqian.web.controller.mqservice.RabbitSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -23,7 +26,7 @@ public class FavorController extends BaseController {
     @Autowired
     private PostService postService;
     @Autowired
-    private ApplicationContext applicationContext;
+    RabbitSender rabbitSender;
 
     /**
      * 喜欢文章
@@ -38,6 +41,7 @@ public class FavorController extends BaseController {
         if (id != null) {
             try {
                 AccountProfile up = getSubject().getProfile();
+                //fix bug
                 postService.favor(up.getId(), id);
 
                 sendNotify(up.getId(), id);
@@ -77,11 +81,23 @@ public class FavorController extends BaseController {
      * @param postId
      */
     private void sendNotify(long userId, long postId) {
-        NotifyEvent event = new NotifyEvent("NotifyEvent");
+        //这里用mq替代
+        RabbitMetaMessage message = new RabbitMetaMessage();
+        //设置交换机
+        message.setExchange(MQConstants.BUSINESS_EXCHANGE);
+        //设置key
+        message.setRoutingKey(MQConstants.NOTIFY_KEY);
+        NotifyEvent event = new NotifyEvent();
         event.setFromUserId(userId);
         event.setEvent(Consts.NOTIFY_EVENT_FAVOR_POST);
         // 此处不知道文章作者, 让通知事件系统补全
         event.setPostId(postId);
-        applicationContext.publishEvent(event);
-    }
+        message.setPayload(event);
+        //改为发送mq
+        try {
+            rabbitSender.send(message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+     }
 }

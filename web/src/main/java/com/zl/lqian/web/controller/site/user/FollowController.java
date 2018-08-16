@@ -2,10 +2,13 @@ package com.zl.lqian.web.controller.site.user;
 
 import com.zl.lqian.base.data.Data;
 import com.zl.lqian.base.lang.Consts;
+import com.zl.lqian.boot.mq.MQConstants;
+import com.zl.lqian.boot.mq.RabbitMetaMessage;
 import com.zl.lqian.modules.user.data.AccountProfile;
-import com.zl.lqian.core.event.NotifyEvent;
 import com.zl.lqian.modules.user.service.FollowService;
 import com.zl.lqian.web.controller.BaseController;
+import com.zl.lqian.web.controller.mqservice.NotifyEvent;
+import com.zl.lqian.web.controller.mqservice.RabbitSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -22,7 +25,8 @@ public class FollowController extends BaseController {
     private FollowService followService;
     @Autowired
     private ApplicationContext applicationContext;
-
+    @Autowired
+    RabbitSender rabbitSender;
     @RequestMapping("/follow")
     public @ResponseBody
     Data follow(Long id) {
@@ -83,10 +87,22 @@ public class FollowController extends BaseController {
      * @param followId
      */
     private void sendNotify(long userId, long followId) {
-        NotifyEvent event = new NotifyEvent("NotifyEvent");
+        RabbitMetaMessage message = new RabbitMetaMessage();
+        //设置交换机
+        message.setExchange(MQConstants.BUSINESS_EXCHANGE);
+        //设置key
+        message.setRoutingKey(MQConstants.NOTIFY_KEY);
+        NotifyEvent event = new NotifyEvent();
+
         event.setToUserId(followId);
         event.setFromUserId(userId);
         event.setEvent(Consts.NOTIFY_EVENT_FOLLOW);
-        applicationContext.publishEvent(event);
+        message.setPayload(event);
+        try {
+            rabbitSender.send(message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //applicationContext.publishEvent(event);
     }
 }

@@ -1,6 +1,5 @@
-package com.zl.lqian.core.event;
+package com.zl.lqian.web.controller.mqservice;
 
-import org.springframework.context.ApplicationEvent;
 
 /**
  *   文章发布事件
@@ -11,17 +10,13 @@ import org.springframework.context.ApplicationEvent;
  *
  * created by zl
  */
-public class PostUpdateEvent extends ApplicationEvent {
+public class PostUpdateEvent {
     public final static int ACTION_PUBLISH = 1;
     public final static int ACTION_DELETE = 2;
 
     private long postId;
     private long userId;
     private int action = ACTION_PUBLISH;
-
-    public PostUpdateEvent(Object source) {
-        super(source);
-    }
 
     public long getPostId() {
         return postId;

@@ -16,6 +16,7 @@ import com.zl.lqian.modules.blog.service.ChannelService;
 import com.zl.lqian.modules.blog.service.PostService;
 import com.zl.lqian.modules.user.data.AccountProfile;
 import com.zl.lqian.web.controller.BaseController;
+import com.zl.lqian.web.utils.OssUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,16 +86,13 @@ public class PostController extends BaseController {
 	@RequiresPermissions("post:update")
 	public String subUpdate(PostVO post, @RequestParam(value = "file", required=false) MultipartFile file) throws Exception {
 		if (post != null) {
+			//TODO 这俩需要改为oss上传
+			String fileName = file.getOriginalFilename();
 			/**
 			 * 保存预览图片
 			 */
 			if (file != null && !file.isEmpty()) {
-				String thumbnail = fileRepo.storeScale(file, appContext.getThumbsDir(), 364, 200);
-
-				if (StringUtils.isNotBlank(post.getThumbnail())) {
-					fileRepo.deleteFile(post.getThumbnail());
-				}
-
+				String thumbnail = OssUtils.uploadImag(fileName,file);
 				post.setThumbnail(thumbnail);
 			}
 

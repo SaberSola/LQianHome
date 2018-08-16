@@ -1,32 +1,43 @@
-/*
-package com.zl.lqian.core.event.handler;
+package com.zl.lqian.web.controller.mqservice;
 
 import com.zl.lqian.base.lang.Consts;
-import com.zl.lqian.modules.user.data.NotifyVO;
 import com.zl.lqian.modules.blog.data.PostVO;
-import com.zl.lqian.core.event.NotifyEvent;
 import com.zl.lqian.modules.blog.service.PostService;
+import com.zl.lqian.modules.user.data.NotifyVO;
 import com.zl.lqian.modules.user.service.NotifyService;
+import com.zl.lqian.web.utils.MapToBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-*/
-/**
- * @author zl on 2015/8/31.
- *//*
+import java.util.LinkedHashMap;
 
 @Component
-public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
+public class NotifyMessageListener extends AbstractMessageListener {
+
+    private Logger LOGGER = LoggerFactory.getLogger(NotifyMessageListener.class);
+
     @Autowired
     private NotifyService notifyService;
     @Autowired
     private PostService postService;
 
-    @Async
+
     @Override
-    public void onApplicationEvent(NotifyEvent event) {
+    public void receiveMessage(Message message, MessageConverter messageConverter) {
+
+        NotifyEvent event = new NotifyEvent();
+        LinkedHashMap<String,Object> hashMap =(LinkedHashMap)messageConverter.fromMessage(message);
+        LOGGER.debug("get message success:"+hashMap.toString());
+        MapToBean.transMap2Bean(hashMap,event);
+        LOGGER.debug("get message success:"+event.toString());
+        if (event == null) {
+            return;
+        }
+        //处理业务需求
         NotifyVO nt = new NotifyVO();
         nt.setPostId(event.getPostId());
         nt.setFromId(event.getFromUserId());
@@ -41,15 +52,12 @@ public class NotifyEventHandler implements ApplicationListener<NotifyEvent> {
             case Consts.NOTIFY_EVENT_COMMENT_REPLY:
                 PostVO p2 = postService.get(event.getPostId());
                 nt.setOwnId(p2.getAuthorId());
-
                 // 自增评论数
                 postService.identityComments(event.getPostId());
                 break;
             default:
                 nt.setOwnId(event.getToUserId());
         }
-
         notifyService.send(nt);
     }
 }
-*/

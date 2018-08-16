@@ -11,10 +11,10 @@ public class MQConstants {
 	public static final String BUSINESS_EXCHANGE = "business.exchange";
 
 	/**你的业务队列名称*/
-	public static final String BUSINESS_QUEUE = "business.queue";
+	public static final String NOTIFY_QUEUE = "business.queue";
 
 	/**你的业务key*/
-	public static final String BUSINESS_KEY = "business.key";
+	public static final String NOTIFY_KEY = "business.key";
 
 	public static final String MQ_PRODUCER_RETRY_KEY = "mq.producer.retry.key";
 

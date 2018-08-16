@@ -5,15 +5,17 @@ package com.zl.lqian.web.controller.site.comment;
 
 import com.zl.lqian.base.data.Data;
 import com.zl.lqian.base.lang.Consts;
+import com.zl.lqian.boot.mq.MQConstants;
+import com.zl.lqian.boot.mq.RabbitMetaMessage;
 import com.zl.lqian.modules.user.data.AccountProfile;
 import com.zl.lqian.modules.blog.data.CommentVO;
-import com.zl.lqian.core.event.NotifyEvent;
 import com.zl.lqian.modules.blog.service.CommentService;
 import com.zl.lqian.web.controller.BaseController;
+import com.zl.lqian.web.controller.mqservice.NotifyEvent;
+import com.zl.lqian.web.controller.mqservice.RabbitSender;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,7 @@ public class CommentController extends BaseController {
 	@Autowired
 	private CommentService commentService;
 	@Autowired
-	private ApplicationContext applicationContext;
+	private RabbitSender rabbitSender;
 
 	@RequestMapping("/list/{toId}")
 	public @ResponseBody Page<CommentVO> view(@PathVariable Long toId) {
@@ -100,16 +102,25 @@ public class CommentController extends BaseController {
 	private void sendNotify(long userId, long postId, long pid) {
 
 		//TODO 此处用mq做
-//		NotifyEvent event = new NotifyEvent("NotifyEvent");
-//		event.setFromUserId(userId);
-//
-//		if (pid > 0) {
-//			event.setEvent(Consts.NOTIFY_EVENT_COMMENT_REPLY);
-//		} else {
-//			event.setEvent(Consts.NOTIFY_EVENT_COMMENT);
-//		}
-//		// 此处不知道文章作者, 让通知事件系统补全
-//		event.setPostId(postId);
-//		applicationContext.publishEvent(event);
+		RabbitMetaMessage message = new RabbitMetaMessage();
+		message.setExchange(MQConstants.BUSINESS_EXCHANGE);
+		message.setRoutingKey(MQConstants.NOTIFY_KEY);
+
+		NotifyEvent event = new NotifyEvent();
+		event.setFromUserId(userId);
+
+		if (pid > 0) {
+			event.setEvent(Consts.NOTIFY_EVENT_COMMENT_REPLY);
+		} else {
+			event.setEvent(Consts.NOTIFY_EVENT_COMMENT);
+		}
+		// 此处不知道文章作者, 让通知事件系统补全
+		event.setPostId(postId);
+		message.setPayload(event);
+		try {
+			rabbitSender.send(message);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

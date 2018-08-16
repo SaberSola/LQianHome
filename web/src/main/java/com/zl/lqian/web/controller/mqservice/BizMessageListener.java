@@ -1,10 +1,12 @@
 package com.zl.lqian.web.controller.mqservice;
 
 import com.zl.lqian.base.lang.Consts;
-import com.zl.lqian.core.event.PostUpdateEvent;
+import com.zl.lqian.boot.mq.RabbitMetaMessage;
+
 import com.zl.lqian.modules.blog.data.FeedsVO;
 import com.zl.lqian.modules.blog.service.FeedsService;
 import com.zl.lqian.modules.user.service.UserEventService;
+import com.zl.lqian.web.utils.MapToBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -13,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
  *
- * 这里接受义务消息
+ * 这里接收业务消息
  */
 
 @Component
@@ -32,12 +36,15 @@ public class BizMessageListener extends AbstractMessageListener {
 
     @Override
     public void receiveMessage(Message message, MessageConverter messageConverter) {
-        PostUpdateEvent event =(PostUpdateEvent)messageConverter.fromMessage(message);
+        //贼几把奇怪 期初竟然是个LinkedHashMap
+        PostUpdateEvent event = new PostUpdateEvent();
+        LinkedHashMap<String,Object> hashMap =(LinkedHashMap)messageConverter.fromMessage(message);
+        logger.info("get message success:"+hashMap.toString());
+        MapToBean.transMap2Bean(hashMap,event);
         logger.info("get message success:"+event.toString());
         if (event == null) {
             return;
         }
-
         switch (event.getAction()) {
             case PostUpdateEvent.ACTION_PUBLISH:
                 // 创建动态对象

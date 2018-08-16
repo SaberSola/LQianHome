@@ -51,46 +51,12 @@ public class AvatarController extends BaseController {
 			model.put("data", Data.failure("请选择图片"));
 			return view(Views.USER_AVATAR);
 		}
-		
-		if (width != null && height != null) {
-			String root = fileRepo.getRoot();
-			File temp = new File(root + path);
-			File scale = null;
-			
-			// 目标目录
-			String ava100 = appContext.getAvaDir() + getAvaPath(profile.getId(), 100);
-			String dest = root + ava100;
 			try {
-				// 判断父目录是否存在
-				File f = new File(dest);
-		        if(!f.getParentFile().exists()){
-		            f.getParentFile().mkdirs();
-		        }
-		        // 在目标目录下生成截图
-		        String scalePath = f.getParent() + "/" + profile.getId() + ".jpg";
-				ImageUtils.cutImage(temp, scalePath, x.intValue(), y.intValue(), width.intValue());
-		        
-				// 对结果图片进行压缩
-				ImageUtils.scaleImage(new File(scalePath), dest, 100);
-
-				AccountProfile user = userService.updateAvatar(profile.getId(), ava100);
+				AccountProfile user = userService.updateAvatar(profile.getId(),path);
 				putProfile(user);
-				
-				scale = new File(scalePath);
 			} catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				temp.delete();
-				if (scale != null) {
-					scale.delete();
-				}
 			}
-		}
 		return "redirect:/user/profile";
-	}
-	
-	public String getAvaPath(long uid, int size) {
-		String base = FilePathUtils.getAvatar(uid);
-		return String.format("/%s_%d.jpg", base, size);
 	}
 }

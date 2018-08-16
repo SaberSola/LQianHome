@@ -2,6 +2,7 @@ package com.zl.lqian.boot.mq;
 
 
 import com.zl.lqian.web.controller.mqservice.BizMessageListener;
+import com.zl.lqian.web.controller.mqservice.NotifyMessageListener;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -45,7 +46,7 @@ public class BizQueueConfig {
 
         /*******设置消息的过期时间**********/
         //arguments.put("x-message-ttl", 60000);
-        return new Queue(MQConstants.BUSINESS_QUEUE,true,false,false,arguments);
+        return new Queue(MQConstants.NOTIFY_QUEUE,true,false,false,arguments);
     }
     /**
      * 配置ActionQueue
@@ -68,7 +69,7 @@ public class BizQueueConfig {
     @Bean
     public Binding bizBinding() {
         return BindingBuilder.bind(bizQueue()).to(businessExchange())
-                .with(MQConstants.BUSINESS_KEY);
+                .with(MQConstants.NOTIFY_KEY);
     }
 
     /**
@@ -89,10 +90,29 @@ public class BizQueueConfig {
                                                                BizMessageListener bizMessageListener) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         //可以绑定多个queue
-        container.setQueues(bizQueue(),actionQueue());
+        container.setQueues(actionQueue());
         container.setExposeListenerChannel(true);
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         container.setMessageListener(bizMessageListener);
+        /** 设置消费者能处理未应答消息的最大个数 */
+        container.setPrefetchCount(10);
+        return container;
+    }
+
+
+    /**
+     *
+     * 设置监听器
+     */
+    @Bean
+    public SimpleMessageListenerContainer ActionListenerContainer(ConnectionFactory connectionFactory,
+                                                                  NotifyMessageListener notifyMessageListener) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
+        //可以绑定多个queue
+        container.setQueues(bizQueue());
+        container.setExposeListenerChannel(true);
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        container.setMessageListener(notifyMessageListener);
         /** 设置消费者能处理未应答消息的最大个数 */
         container.setPrefetchCount(10);
         return container;

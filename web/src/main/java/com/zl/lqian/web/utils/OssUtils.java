@@ -3,16 +3,11 @@ package com.zl.lqian.web.utils;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.BucketInfo;
 import com.aliyun.oss.model.PutObjectRequest;
-import com.zl.lqian.base.data.Data;
+import com.zl.lqian.boot.OssConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -26,20 +21,10 @@ public class OssUtils {
 
     static Logger logger = LoggerFactory.getLogger(OssUtils.class);
 
-    private static String endpoint = "https://oss-cn-shanghai.aliyuncs.com";
-
-    private static String accessKeyId="LTAI39c8oZPqVZWt";
-
-    private static String accessKeySecret="b7ZB4op2ti93RGdOttS03dqvSDKzmP";
-
-    private static String bucketName="wangq";
-
-    private static String aliyunOssUrl="https://wangq.oss-cn-shanghai.aliyuncs.com/";
-
     private static final   SimpleDateFormat SDF_YMD = new SimpleDateFormat("yyyyMMdd");
     private static OSSClient init() {
-        OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-        BucketInfo f = ossClient.getBucketInfo(bucketName);
+        OSSClient ossClient = new OSSClient(OssConfiguration.endpoint,OssConfiguration.accessKeyId, OssConfiguration.accessKeySecret);
+        BucketInfo f = ossClient.getBucketInfo(OssConfiguration.bucketName);
         return ossClient;
     }
 
@@ -55,9 +40,9 @@ public class OssUtils {
             String suffix ="."+ fileName.substring(fileName.lastIndexOf(".") + 1);
 
             logger.info("start upload!");
-            ossClient.putObject(new PutObjectRequest(bucketName, keyUrl + suffix, ins));
+            ossClient.putObject(new PutObjectRequest(OssConfiguration.bucketName, keyUrl + suffix, ins));
             logger.info("End upload!");
-            String picUrl = aliyunOssUrl + keyUrl + suffix;
+            String picUrl = OssConfiguration.url + keyUrl + suffix;
 
             return picUrl;
         } catch (Exception e) {

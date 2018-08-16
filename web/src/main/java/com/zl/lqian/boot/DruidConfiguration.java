@@ -27,8 +27,6 @@ public class DruidConfiguration {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         // IP白名单
         servletRegistrationBean.addInitParameter("allow", "*");
-        // IP黑名单(共同存在时，deny优先于allow)
-        servletRegistrationBean.addInitParameter("deny", "45.32.254.172");
         //控制台管理用户
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "admin");
@@ -47,7 +45,7 @@ public class DruidConfiguration {
 
     //解决 spring.datasource.filters=stat,wall,log4j 无法正常注册进去
     @ConfigurationProperties(prefix = DB_PREFIX)
-    class IDataSourceProperties {
+    class DataSourceProperties {
         private String url;
         private String username;
         private String password;

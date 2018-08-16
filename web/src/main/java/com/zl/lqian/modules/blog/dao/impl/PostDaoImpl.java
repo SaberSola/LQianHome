@@ -57,15 +57,15 @@ public class PostDaoImpl implements PostDaoCustom {
 		query.setFirstResult(pageable.getOffset());
 		query.setMaxResults(pageable.getPageSize());
 
-	    StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
-	    SimpleHTMLFormatter formatter = new SimpleHTMLFormatter("<span style='color:red;'>", "</span>");
-        QueryScorer queryScorer = new QueryScorer(luceneQuery);
-        Highlighter highlighter = new Highlighter(formatter, queryScorer);
-        
-		List<Post> list = query.getResultList();
-	    List<PostVO> rets = new ArrayList<>(list.size());
+		StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
+		SimpleHTMLFormatter formatter = new SimpleHTMLFormatter("<span style='color:red;'>", "</span>");
+		QueryScorer queryScorer = new QueryScorer(luceneQuery);
+		Highlighter highlighter = new Highlighter(formatter, queryScorer);
 
-	    for (Post po : list) {
+		List<Post> list = query.getResultList();
+		List<PostVO> rets = new ArrayList<>(list.size());
+
+		for (Post po : list) {
 			PostVO m = BeanMapUtils.copy(po, 0);
 
 			// 处理高亮

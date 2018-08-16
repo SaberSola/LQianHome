@@ -1,11 +1,11 @@
-package com.zl.lqian.core.event;
 
-import org.springframework.context.ApplicationEvent;
+package com.zl.lqian.web.controller.mqservice;
 
 /**
  * @author zl on 2015/8/31.
  */
-public class NotifyEvent extends ApplicationEvent {
+
+public class NotifyEvent {
 	private static final long serialVersionUID = -4261382494171476390L;
 	
 	private long fromUserId;
@@ -13,14 +13,6 @@ public class NotifyEvent extends ApplicationEvent {
     private int event;
     private long postId;
 
-    /**
-     * Create a new ApplicationEvent.
-     *
-     * @param source the component that published the event (never {@code null})
-     */
-    public NotifyEvent(Object source) {
-        super(source);
-    }
 
     public long getFromUserId() {
         return fromUserId;
