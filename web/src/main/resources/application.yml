@@ -1,5 +1,12 @@
 server:
-    port: 8080
+    port: 8089
+aliyun:
+    oss:
+        endpoint:
+        accessKeyId:
+        accessKeySecret:
+        bucketName:
+        url:
 spring:
     devtools:
         enabled: true
@@ -26,7 +33,7 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         driver-class-name: com.mysql.jdbc.Driver
         platform: mysql
-        url: jdbc:mysql://45.32.254.172:3306/zlblog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://:3306/zlblog?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: admin
         password: admin
         initialSize: 5
@@ -45,7 +52,7 @@ spring:
         database: mysql
         show-sql: false
         properties:
-            hibernate.format_sql: true
+            hibernate.show_sql: true
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
@@ -63,7 +70,7 @@ spring:
         properties:
             mail.smtp.auth: true
     rabbitmq:
-        host: 45.32.254.172
+        host:
         port: 5672
         username: mqadmin
         password: mqadmin
@@ -82,7 +89,7 @@ spring:
                 checkout-timeout: 10000
     redis:
         database: 0
-        host: 45.32.254.172
+        host:
         port: 6379
         timeout: 3000
         jedis:
@@ -91,19 +98,13 @@ spring:
                 min-idle: 50
                 max-active: 2000
                 max-wait: 1000
-
 # site.theme: [default|card]
 site:
     theme: card
     store:
-      root: E:/data/LQianHome/
+      root: /data/LQianHome/
       size: 2
-#OSS 配置
+logging:
+    config:
+        classpath: log4j2.xml
 
-aliyun:
-    oss:
-      endpoint: https://oss-cn-shanghai.aliyuncs.com
-      accessKeyId: LTAI39c8oZPqVZWt
-      accessKeySecret: b7ZB4op2ti93RGdOttS03dqvSDKzmP
-      bucketName: wangq
-      url: https://wangq.oss-cn-shanghai.aliyuncs.com/
