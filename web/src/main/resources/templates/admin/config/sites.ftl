@@ -11,7 +11,7 @@
         <label class="col-lg-2 control-label">域名</label>
         <div class="col-lg-8">
             <input type="text" name="site_domain" class="form-control" value="${configs['site_domain'].value}">
-            <p class="help-block">示例: http://LQianHome.com</p>
+            <p class="help-block">示例: http://www.1022qian.cn</p>
         </div>
     </div>
     <div class="form-group">

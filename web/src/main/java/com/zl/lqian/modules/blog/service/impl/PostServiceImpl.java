@@ -29,9 +29,11 @@ import com.zl.lqian.modules.user.service.UserService;
 import com.zl.lqian.modules.utils.BeanMapUtils;
 import com.zl.lqian.web.controller.mqservice.PostUpdateEvent;
 import com.zl.lqian.web.controller.mqservice.RabbitSender;
+import javafx.geometry.Pos;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -74,6 +76,9 @@ public class PostServiceImpl implements PostService {
 	private PostAttributeDao postAttributeDao;
 	@Autowired
 	RabbitSender rabbitSender;
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+
 
 	@Override
 	@Cacheable
@@ -242,26 +247,20 @@ public class PostServiceImpl implements PostService {
 	@CacheEvict(allEntries = true)
 	public long post(PostVO post) {
 		Post po = new Post();
-
 		BeanUtils.copyProperties(post, po);
-
 		po.setCreated(new Date());
 		po.setStatus(EntityStatus.ENABLED);
-
 		// 处理摘要
 		if (StringUtils.isBlank(post.getSummary())) {
 			po.setSummary(trimSummary(post.getContent()));
 		} else {
 			po.setSummary(post.getSummary());
 		}
-
 		postDao.save(po);
-
 		PostAttribute attr = new PostAttribute();
 		attr.setContent(post.getContent());
 		attr.setId(po.getId());
 		submitAttr(attr);
-
 		onPushEvent(po, PostUpdateEvent.ACTION_PUBLISH);
 		return po.getId();
 	}
@@ -269,6 +268,8 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Cacheable(key = "'view_' + #id")
 	public PostVO get(long id) {
+		//TODO 这里需要改为从缓存中读取
+		Map<String,Object> post = postDao.findOneNew(id);
 		Post po = postDao.findOne(id);
 		PostVO d = null;
 		if (po != null) {

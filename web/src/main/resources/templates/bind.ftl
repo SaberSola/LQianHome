@@ -9,7 +9,7 @@
 <body>
 <div class="wrap">
     <div class="main">
-        <a href="http://LQianHome.com/email/bind/${userId}?code=${code}&type=${type}">点此链接完成绑定邮箱</a>
+        <a href="http://www.1022qian.cn/email/bind/${userId}?code=${code}&type=${type}">点此链接完成绑定邮箱</a>
     </div>
 </div>
 </body>

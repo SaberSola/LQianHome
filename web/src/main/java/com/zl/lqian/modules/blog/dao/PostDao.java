@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zl
@@ -56,6 +57,7 @@ public interface PostDao extends JpaRepository<Post, Long>, JpaSpecificationExec
 
 	@Modifying
 	@Transactional
+	//TODO  这种写法....真的烂
 	@Query("update Post set favors = favors + :increment where id = :id")
 	void updateFavors(@Param("id") long id, @Param("increment") int increment);
 
@@ -63,5 +65,4 @@ public interface PostDao extends JpaRepository<Post, Long>, JpaSpecificationExec
 	@Transactional
 	@Query("update Post set comments = comments + :increment where id = :id")
 	void updateComments(@Param("id") long id, @Param("increment") int increment);
-	
 }

@@ -9,7 +9,7 @@
 <body>
 <div class="wrap">
     <div class="main">
-        <a href="http://LQianHome.com/email/forgot/${userId}?code=${code}&type=${type}">点此链接修改密码</a>
+        <a href="http://www.1022qian.cn/email/forgot/${userId}?code=${code}&type=${type}">点此链接修改密码</a>
     </div>
 </div>
 </body>

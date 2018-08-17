@@ -39,5 +39,5 @@ ${site_metas}
 <script type="text/javascript" src="${base}/theme/default/js/sea.config.js"></script>
 
 <!-- Favicons -->
-<link rel="apple-touch-icon-precomposed" href="http://LQianHome.com/dist/images/logo.png"/>
-<link rel="shortcut icon" href="http://LQianHome.com/dist/images/logo.png"/>
+<link rel="apple-touch-icon-precomposed" href="http://www.1022qian.cn/dist/images/logo.png"/>
+<link rel="shortcut icon" href="http://www.1022qian.cn/dist/images/logo.png"/>

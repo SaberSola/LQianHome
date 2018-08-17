@@ -5,8 +5,8 @@
         </div>
         <div class="footer-col footer-col-copy">
             <ul class="footer-nav hidden-xs">
-                <li class="menu-item"><a href="${base}/about">关于我们</a></li>
-                <li class="menu-item"><a href="${base}/joinus">联系我们</a></li>
+                <li class="menu-item"><a href="${base}/about">关于网站</a></li>
+                <li class="menu-item"><a href="${base}/joinus">联系楼主</a></li>
                 <li class="menu-item"><a href="${base}/faqs">常见问题</a></li>
                 <li>
                     <script>
@@ -26,7 +26,7 @@
         </div>
         <div class="footer-col footer-col-sns hidden-xs hidden-sm">
             <div class="footer-sns">
-                <span>Powered By <a href="http://LQianHome.com/?copyright" target="_blank">LQianHome</a></span>
+                <span>Powered By <a href="http://www.1022qian.cn/?copyright" target="_blank">LQianHome</a></span>
             </div>
         </div>
     </div>

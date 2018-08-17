@@ -31,7 +31,7 @@
 
                     <fieldset class="form-group">
                         <div class="alert alert-info">
-                            使用以下方法注册或者登录（<a class="forget-password" href="${base}/forgot/apply">忘记密码？</a>）
+                            使用以下方法注册或者登录(此网站第三方登陆需要申请appkey，因为要花钱的...,暂时不支持微博QQ登陆)（<a class="forget-password" href="${base}/forgot/apply" target="_blank">忘记密码(暂时不支持此功能,有时间会搞下，估计也没人注册，无所谓...)？</a>）
                         </div>
                         <a class="btn btn-default btn-block" href="${base}/oauth/callback/call_weibo">
                             <i class="fa fa-weibo"></i> 微博帐号登录
