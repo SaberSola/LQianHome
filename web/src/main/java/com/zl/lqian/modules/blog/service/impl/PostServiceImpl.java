@@ -269,7 +269,6 @@ public class PostServiceImpl implements PostService {
 	@Cacheable(key = "'view_' + #id")
 	public PostVO get(long id) {
 		//TODO 这里需要改为从缓存中读取
-		Map<String,Object> post = postDao.findOneNew(id);
 		Post po = postDao.findOne(id);
 		PostVO d = null;
 		if (po != null) {

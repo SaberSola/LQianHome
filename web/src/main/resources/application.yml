@@ -2,11 +2,11 @@ server:
     port: 8089
 aliyun:
     oss:
-        endpoint:
-        accessKeyId:
-        accessKeySecret:
-        bucketName:
-        url:
+        endpoint: https://oss-cn-shanghai.aliyuncs.com
+        accessKeyId: LTAI39c8oZPqVZWt
+        accessKeySecret: b7ZB4op2ti93RGdOttS03dqvSDKzmP
+        bucketName: wangq
+        url: https://wangq.oss-cn-shanghai.aliyuncs.com/
 spring:
     devtools:
         enabled: true
@@ -24,6 +24,7 @@ spring:
         settings:
             classic_compatible: true #处理空值
             template_exception_handler: rethrow
+
             template_update_delay: 0
             datetime_format: yyyy-MM-dd HH:mm
             number_format: 0.##
@@ -33,7 +34,7 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         driver-class-name: com.mysql.jdbc.Driver
         platform: mysql
-        url: jdbc:mysql://:3306/zlblog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://122.152.215.72:3306/zlblog?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: admin
         password: admin
         initialSize: 5
@@ -50,7 +51,7 @@ spring:
         logSlowSql: true
     jpa:
         database: mysql
-        show-sql: false
+        show-sql: true
         properties:
             hibernate.show_sql: true
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -70,7 +71,7 @@ spring:
         properties:
             mail.smtp.auth: true
     rabbitmq:
-        host:
+        host: 122.152.215.72
         port: 5672
         username: mqadmin
         password: mqadmin
@@ -89,7 +90,7 @@ spring:
                 checkout-timeout: 10000
     redis:
         database: 0
-        host:
+        host: 122.152.215.72
         port: 6379
         timeout: 3000
         jedis:
@@ -100,7 +101,7 @@ spring:
                 max-wait: 1000
 # site.theme: [default|card]
 site:
-    theme: card
+    theme: default
     store:
       root: /data/LQianHome/
       size: 2
